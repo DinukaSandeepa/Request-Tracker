@@ -252,8 +252,6 @@ async def requestHandler(bot:Update, msg:Message):
             findRegexStr = match(requestRegex, originalMSG)
             requestString = findRegexStr.group()
             contentRequested = originalMSG.split(requestString)[1]
-            nxreject = f"<a href='https://t.me/MCF_Requests/10'</a>"
-            nxrejectx = f"<a href='https://t.me/MCF_Requests/9'</a>"
             
             try:
                 groupIDPro = groupID.removeprefix(str(-100))
@@ -351,15 +349,16 @@ async def callBackButton(bot:Update, callback_query:CallbackQuery):
                     else:   # If accepting, rejecting request tried to be done by either admin or owner
                         if data == "reject":
                             result = "REJECTED"
-                            groupResult = "ප්‍රතික්ෂේප කර ඇත.💔\n\nඔබගේ ඉල්ලීම ප්‍රතික්ෂේප කිරීමට හේතුව දැනගැනීමට {nxreject} Click කරන්න.."
+                            groupResult = "ප්‍රතික්ෂේප කර ඇත.💔"
                             button = InlineKeyboardButton("ඉල්ලීම ප්‍රතික්ෂේප කර ඇත.🚫", "rejected")
+                          
                         elif data == "done":
                             result = "COMPLETED"
-                            groupResult = "සම්පූර්ණ කර ඇත.🥳."
+                            groupResult = "සම්පූර්ණ කර ඇත.🥳\n\nඔබගේ ඉල්ලීමට ස්තූතියි. ☺️"
                             button = InlineKeyboardButton("ඉල්ලීම සම්පූර්ණයි.✅", "completed")
                         elif data == "unavailable":
                             result = "UNAVAILABLE"
-                            groupResult = "ලබාදිය නොහැක.🥲.\n\nඔබගේ ඉල්ලීම ලබානොදීමට හේතුව දැනගැනීමට {nxrejectx} Click කරන්න."
+                            groupResult = "ලබාදිය නොහැක.🥲."
                             button = InlineKeyboardButton("ඉල්ලීම ප්‍රතික්ෂේප කර ඇත.🚫", "rejected")
 
                         msg = callback_query.message
@@ -389,7 +388,8 @@ async def callBackButton(bot:Update, callback_query:CallbackQuery):
                         )
 
                         # Result of request sent to group
-                        replyText = f"<b>👋 හායි {mentionUser}🧑\nඔබගේ ඉල්ලීම වන {contentRequested} {groupResult}\n\nඔබගේ ඉල්ලීමට ස්තූතියි. ☺️</b>"
+                        replyText = f"<b>👋 හායි {mentionUser}🧑\nඔබගේ ඉල්ලීම වන {contentRequested} {groupResult}\n\n</b>"
+                        
                         await bot.send_message(
                             int(groupID),
                             replyText,
